@@ -21,8 +21,7 @@ import { useChat } from 'ai/react';
 export default function Home() {
 
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({});
-
-  console.log(messages);
+  
 
   return (
     <main className="max-w-3xl mx-auto my-10">
