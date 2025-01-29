@@ -13,17 +13,16 @@ export async function POST(req: Request) {
     if (!messages)
       return new NextResponse("Please Type your Query", { status: 400 });
 
-    const result = streamText({
+    const result = await streamText({
       model: togetherai('meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo'),
       temperature: 0.7,
-      system: 'You are a AI Assitant Developed by Subhendu Baral. Please respond to user"s response within max 40 words',
+      system: 'You are an AI Assistant developed by Subhendu Baral. Please respond to user\'s response within max 40 words',
       messages,
     });
 
     return result.toDataStreamResponse()
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[CHAT ERROR]", error);
-    return new NextResponse(error?.message || "Internal Server Error", { status: error?.status || 500 });
   }
 }
